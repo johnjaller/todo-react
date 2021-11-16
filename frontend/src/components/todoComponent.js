@@ -4,24 +4,29 @@ import {
   AddTodo,
   DeleteTodo,
   PutTodo,
-  loadTodo,
+  loadTodo,searchTodo
 } from "../Redux/todoList/action";
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { Button,Row,Col,Container } from "reactstrap";
+import '../App.css'
+
 export default function TodoComponent(props) {
   const[query,setQuery]=useState('')
   const [todo, setTodo] = useState("");
   const [warning, setWarning] = useState(false);
   const todoStore = useSelector((state) => state.todoStore);
-  const todoList = todoStore.todoList;
+  let todoList = todoStore.todoList;
   console.log(todoStore);
   console.log(AddTodo);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadTodo());
-  }, []);
-  const searchTodo=(e)=>{
-      setQuery(e.target.value)
-      dispatch(searchTodo(query))
-  }
+  },[]);
+  const SearchTodo=(event)=>{
+    setQuery(event.target.value)
+    console.log(event.target.value)
+     dispatch(searchTodo(event.target.value))
+    }
   const newToDo = () => {
     if (todo !== "") {
       dispatch(AddTodo(todo));
@@ -41,18 +46,23 @@ export default function TodoComponent(props) {
   };
 
   return (
-    <div>
+    <Container className='todo' >
+      <Row>
+        <Col>
         <label htmlFor="search">Search:</label>
-        <input type="text" name='search' value={query} onChange={(e)=>setQuery(e.target.value)} />
+        <input type="text" name='search' value={query} onChange={(event)=>SearchTodo(event)} placeholder='click here to search'/>
+        
       <input
         type="text"
         placeholder=" new Todo"
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
       />
-      <button type="submit" onClick={newToDo}>
+      <Button type="submit" onClick={newToDo}>
         Add
-      </button>
+      </Button>
+        </Col>
+        <Col>
       {todoList && todoList.length > 0 ? (
         <ul>
           {todoList.map((item) => (
@@ -62,13 +72,15 @@ export default function TodoComponent(props) {
                 value={item.content}
                 onChange={(event) => modifyTodo(event, item.id)}
               />
-              <button onClick={() => removeTodo(item.id)}>remove</button>
+              <Button onClick={() => removeTodo(item.id)}>remove</Button>
             </li>
           ))}
         </ul>
       ) : (
         <p>There are no new Todo yet</p>
       )}
-    </div>
+      </Col>
+      </Row>
+    </Container>
   );
 }

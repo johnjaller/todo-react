@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { PostSignup } from "../Redux/auth/action";
+import { Link } from "react-router-dom";
+import '../App.css'
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { Button } from "reactstrap";
+
 export default function SignupComponent(props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -24,7 +29,7 @@ export default function SignupComponent(props) {
     setPasword('')
   };
   return (
-    <div>
+    <div >
       <h3>Sign Up</h3>
       <label htmlFor="username">Username:</label>
       <form onSubmit={formSubmission}>
@@ -57,8 +62,10 @@ export default function SignupComponent(props) {
           onChange={(e) => handleChange(e)}
         />
         <br />
-        <button type="submit">Sign up</button>
+        <Button color='primary' type="submit">Sign up</Button>
       </form>
+    <Link to='/'>Got an account?</Link>
+
     </div>
   );
 }

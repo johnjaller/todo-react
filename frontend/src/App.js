@@ -52,16 +52,4 @@ function App() {
   );
 }
 
-// const mapStateToPropsApp = (state) => {
-//   return {
-//     isLoggedIn: state.authStore.isLoggedIn,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     // logOutMDP: () => dispatch(Logout()),
-//   };
-// };
-
 export default App;

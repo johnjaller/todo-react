@@ -38,8 +38,40 @@
 }
 
 .signupContainer {
+  position: absolute;
+  width: 500px;
+  height: 350px;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+background-color: aliceblue;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.container{
+  background-color: white;
+  width: 100vw;
+  padding: 5px;
+  flex-direction: column;
   display: flex;
-  justify-content: center;
-  height: 100vh;
   align-items: center;
+ 
+}
+nav{
+  text-align: right;
+  background-color: white;
+}
+
+input{
+  margin: 100px;
+  
+}
+
+.todo{
+
+background-color: aliceblue;
+display: flex;
 }

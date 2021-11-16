@@ -112,8 +112,22 @@ export function loadTodo() {
 }
 
 export function searchTodo(query) {
-  return {
-    type: Search_todo,
-    payload: query,
+  let userToken = localStorage.getItem("token");
+  return (dispatch) => {
+    return axios
+      .get(`${process.env.REACT_APP_API_SERVER}/api/todo`, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      })
+      .then((response) => {
+        console.log(response);
+        let { data } = response;
+        data=data.filter(item=>item.content.includes(query))
+        console.log(data);
+        dispatch(loadTodoSuccess(data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(loadTodoFailed());
+      });
   };
 }

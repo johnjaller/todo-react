@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PostLogin } from "../Redux/auth/action";
 import { useHistory,Link,useRouteMatch } from "react-router-dom";
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { Button } from "reactstrap";
+
 export default function LoginComponent(props) {
   const authStore = useSelector((state) => state.authStore);
   const { isLoggedIn } = authStore;
@@ -21,7 +24,7 @@ export default function LoginComponent(props) {
     setPassword("");
   };
   return (
-    <div>
+    <div >
       <h3>Login</h3>
       <form onSubmit={loginSubmit}>
         <label htmlFor="">Username</label>
@@ -43,7 +46,7 @@ export default function LoginComponent(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <button type="submit">Login</button>
+        <Button color='primary' type="submit">Login</Button>
       </form>
      
     </div>
